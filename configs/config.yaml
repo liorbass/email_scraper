@@ -1,0 +1,17 @@
+workers: 12   # Number of workers/processes
+max_queue_size: 20000 # Limit the amount of unprocessed links
+seeds: [] # Initial list to scrape
+loop_max_size: 100 # Limit number of tasks in each process's event loop
+task_sleep: 0.3 # How much time to free after each processing
+metric_log_interval: 5 # Interval for metrics computation
+
+logger:
+  file: /tmp/crawler.log
+  level: INFO
+  format: "%(asctime)s:%(name)s:%(levelname)s: %(message)s"
+
+neo4j:
+  ip: neo4j # When running with the docker-compose file in the repo
+  port: 7687 # Default port
+  user: neo4j # Default username
+  password: Aa123456 # Default password

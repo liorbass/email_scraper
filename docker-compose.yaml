@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+  neo4j:
+    container_name: neo4j
+    image: neo4j:community
+    volumes:
+      - $HOME/neo4j/data:/data
+    networks:
+      - neo4j_net
+    environment:
+      - NEO4J_AUTH=neo4j/Aa123456
+    ports:
+      - '7474:7474'
+      - '7473:7473'
+      - '7687:7687'
+
+  crawler:
+    container_name: crawler
+    image: crawler:latest
+    build: .
+    command: [ "poetry", "run", "python", "main.py" ]
+    networks:
+      - neo4j_net
+    volumes:
+      - ./configs:/configs
+    links:
+      - neo4j
+
+networks:
+  neo4j_net:
